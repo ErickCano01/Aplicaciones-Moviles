@@ -17,9 +17,11 @@ class CreateMessageActivity : AppCompatActivity() {
 
         sendButton.setOnClickListener {
             val message = messageEditText.text.toString()
-            val intent = Intent(this, ReciveMessangeActivity::class.java)
-            intent.putExtra("message", message)
-            startActivity(intent)
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, message)
+            val chooser = Intent.createChooser(intent, "Send message via...")
+            startActivity(chooser)
         }
     }
 }
